@@ -129,3 +129,49 @@ l2({1, 3, 5});	// error
 ```
 関数の戻り値, 仮引数に`auto`を使うと`initializer_list`を推論できない == `template`と挙動が同じ
 </div></details>
+
+<details><summary>
+
+## decltype
+```c++
+int& i;	// decltype(i): int&
+```
+decltypeの主要用途と、1つの注意点。
+
+</summary><div>
+
+### 主要用途
+autoの推論の規則をdecltypeの規則にする
+```c++
+// auto の規則により参照が外れる(戻り値の型: int)
+auto authAndAccess(std::vector<int>& v, std::size_t i)
+{
+	return v[i];
+}
+
+// decltype の規則によって推論する(int&)
+decltype(auto) authAndAccess(std::vector<int>& v, std::size_t i)	// 戻り値の型はdecltype(v[i])
+{
+	return v[i];
+}
+```
+
+### 注意点
+名前でなく, (複雑な)左辺値式を仮引数とした場合、参照型となる
+```c++
+// 名前の場合, 戻り値の型はint
+decltype(auto) func1()
+{
+	int x = 0;
+	return x;	// decltype(x): int
+}
+
+// 複雑な左辺値式の場合, 戻り値の型はint&
+decltype(auto) func2()
+{
+	int x = 0;
+	return (x);	// decltype((x)): int&
+}
+```
+</div></details>
+
