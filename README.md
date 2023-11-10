@@ -132,7 +132,7 @@ l2({1, 3, 5});	// error
 
 <details><summary>
 
-## decltype
+## decltypeの型推論
 ```c++
 int& i;	// decltype(i): int&
 ```
@@ -175,3 +175,5 @@ decltype(auto) func2()
 ```
 </div></details>
 
+## 引用文献
+Effective Modern C++　―C++11/14プログラムを進化させる42項目　Scott Meyers著、千住 治郎訳
