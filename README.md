@@ -218,7 +218,7 @@ decltype(auto) func2()
  	auto gx = func();	// ここを書き換える必要がない
 	```
  - デメリット
-	- 推論規則を理解しないといけない([autoの型推論](URL "#autoの型推論"), [templateの型推論](URL "#templateの型推論"))
+	- 推論規則を理解しないといけない([autoの型推論](URL "https://github.com/Bob8percent/cpp_rule#autoの型推論"), [templateの型推論](URL "[#templateの型推論](https://github.com/Bob8percent/cpp_rule#templateの型推論)"))
  
 </div></details>
 
