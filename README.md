@@ -175,5 +175,52 @@ decltype(auto) func2()
 ```
 </div></details>
 
+<details><summary>
+
+## autoのメリット/デメリット
+`auto`の使用するべきタイミングを見極める
+
+</summary><div>
+
+- メリット
+	- 初期化の強制
+	```c++
+	int x;		// 初期化しなくてもコンパイルできる
+	auto x1;	// error!
+	auto x2 = 0;	// OK!
+	```
+	- 型の不一致を防げる
+	```c++
+ 	std::unordered_map<std::string, int> m;
+
+ 	// 型の不一致! 暗黙の型変換が発生してしまう。
+ 	for(const std::pair<std::string, int>& e : m)	// std::unordered_mapのキーがconstになる仕様を知らなかった…
+ 	{
+		...
+ 	}
+ 	// OK!
+ 	for(const auto& e : m)
+ 	{
+		...
+ 	}
+	```
+	- リファクタリングを容易にする
+	```c++
+ 	auto func()
+ 	{
+ 		// 変更前
+		//int x = 0;
+ 		// 変更後
+ 		long x = 0;
+
+ 		return x;
+ 	}
+ 	auto gx = func();	// ここを書き換える必要がない
+	```
+ - デメリット
+	- 推論規則を理解しないといけない([autoの型推論](URL "#autoの型推論"), [templateの型推論](URL "#templateの型推論"))
+ 	- 
+</div></details>
+
 ## 引用文献
 Effective Modern C++　―C++11/14プログラムを進化させる42項目　Scott Meyers著、千住 治郎訳
