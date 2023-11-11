@@ -178,7 +178,7 @@ decltype(auto) func2()
 <details><summary>
 
 ## autoのメリット/デメリット
-`auto`の使用するべきタイミングを見極める
+`auto`は少し複雑な推論規則がデメリットになりうるが、それでも`auto`宣言を使うべき
 
 </summary><div>
 
@@ -218,7 +218,23 @@ decltype(auto) func2()
  	auto gx = func();	// ここを書き換える必要がない
 	```
  - デメリット
-	- 推論規則を理解しないといけない([autoの型推論](URL "https://github.com/Bob8percent/cpp_rule#autoの型推論"), [templateの型推論](URL "[#templateの型推論](https://github.com/Bob8percent/cpp_rule#templateの型推論)"))
+	- 推論規則を理解しないといけない
+  		- [autoの型推論](#autoの型推論)
+     		- [templateの型推論](#templateの型推論))
+         	- ユーザーに意識させないプロクシクラス
+            	プロクシクラスは効率を上げるために作られたが、変数として扱うことを想定されていない
+            	```c++
+             	// 例
+             	std::vector<bool> func1();
+
+             	// b1はstd::vector<bool>::reference(ワードへのポインタとオフセットを保持したオブジェクト)
+             	auto b1 = func()[n];
+             	// b1のポインタが指すオブジェクトは一時オブジェクトなのでこの段階では既に破棄されており未定義動作
+             	bool _b1 = b1;
+             	
+             	bool b2 = func()[n];	// 設計者が想定した使い方。暗黙の型変換によりプロクシクラスをユーザーに意識させない
+             	bool b3 = static_cast<bool>(func()[n]);	// OK! 未定義動作を回避できるし、vb[n]がbool型ではないことを明示できる
+             	```
  
 </div></details>
 
