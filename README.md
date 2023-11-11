@@ -219,7 +219,7 @@ decltype(auto) func2()
 	```
  - デメリット
 	- 推論規則を理解しないといけない([autoの型推論](URL "#autoの型推論"), [templateの型推論](URL "#templateの型推論"))
- 	- 
+ 
 </div></details>
 
 ## 引用文献
